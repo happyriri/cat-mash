@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import AllCats from './components/AllCats.vue'
 </script>
 
 <template>
-  <AllCats />
+
+  <RouterLink to="/">Vote</RouterLink>
+  <RouterLink to="/stats">Stats</RouterLink>
+
+  <RouterView />
 </template>

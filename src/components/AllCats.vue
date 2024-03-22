@@ -10,7 +10,10 @@ let cats = ref<Cat[]>(catsManager.getAllCats());
 </script>
 
 <template>
-  <div v-for="cat in cats" :key="cat.id" class="container">
+  <div v-for="cat in cats"
+      :key="cat.id"
+      class="container"
+    >
     
     <img class="cat" :src="cat.url">
     <img class="heart" :src="heart" alt="Heart Icon">
