@@ -37,7 +37,7 @@ export const useCatsStore = defineStore('cats', () => {
 
         do {
             catIndexTwo.value = Math.floor(Math.random() * cats.value.length);
-        } while (catIndexOne === catIndexTwo);
+        } while (catIndexOne.value === catIndexTwo.value);
     }
 
     function incrementVote(catId: string) {
