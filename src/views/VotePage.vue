@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+
+import { useCatsStore } from '../stores/cats'
+
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
@@ -7,14 +10,16 @@ import TheCat from '../components/TheCat.vue';
 import catTears from '../assets/cat-tears.png';
 import catHappy from '../assets/cat-happy.png';
 
-import Cat from '../models/cat.models.ts';
-import catsManager from '../managers/cats-manager' // to put in the store
-
-let cats = ref<Cat[]>(catsManager.getAllCats());
+const catsStore = useCatsStore();
 
 let imgTears = ref(true);
 const headerImg = computed(() => {
   return imgTears.value ? catTears : catHappy;
+});
+
+onMounted(() => {
+  catsStore.getAllCats();
+  catsStore.generateTwoRandomCats();
 });
 
 const enterCatChoice = () => {
@@ -25,6 +30,10 @@ const leaveCatChoice = () => {
   imgTears.value = true;
 }
 
+const incrementVote = (catId: string) => {
+  catsStore.incrementVote(catId);
+  catsStore.generateTwoRandomCats();
+}
 
 </script>
 
@@ -37,18 +46,18 @@ const leaveCatChoice = () => {
         <span>Cutest cat ?</span>
       </div>
 
-      <span @click="router.push('/stats')" class="button">Voir les X votes</span>
+      <span @click="router.push('/stats')" class="button">Voir les {{ catsStore.numberVotes }} votes</span>
     </div>
 
     <div class="cats">
       <div @mouseenter="enterCatChoice" @mouseleave="leaveCatChoice">
-        <TheCat :cat="cats[0]"/>
+        <TheCat @vote="incrementVote(catsStore.twoCatsToVote[0].id)" :cat="catsStore.twoCatsToVote[0]"/>
       </div>
 
       <div class="versus">VS</div>
       
       <div @mouseenter="enterCatChoice" @mouseleave="leaveCatChoice">
-        <TheCat :cat="cats[1]"/>
+        <TheCat @vote="incrementVote(catsStore.twoCatsToVote[1].id)" :cat="catsStore.twoCatsToVote[1]"/>
       </div>
     </div>
     

@@ -6,6 +6,10 @@ export default class CatsManager {
     static getAllCats() {
         let allCats: Cat[] = JSON.parse(JSON.stringify(cats));
 
+        for(let i = 0; i < allCats.length; i++) {
+            allCats[i].vote = 0;
+        }
+
         return allCats;
     }
 }

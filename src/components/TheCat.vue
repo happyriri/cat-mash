@@ -12,8 +12,8 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="container">
-    <img class="cat" :src="props.cat.url">
+  <div @click="$emit('vote')" class="container">
+    <img class="cat" :src="props.cat?.url">
     <img class="heart" :src="heart" alt="Heart Icon">
     <div class="circle"></div>
   </div>
@@ -73,5 +73,13 @@ const props = defineProps({
   font-size: 18px;
   font-weight: 600;
   color: white;
+}
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
 }
 </style>
