@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onBeforeMount } from 'vue';
 
 import { useCatsStore } from '../stores/cats'
 
@@ -17,8 +17,7 @@ const headerImg = computed(() => {
   return imgTears.value ? catTears : catHappy;
 });
 
-onMounted(() => {
-  catsStore.getAllCats();
+onBeforeMount(() => {
   catsStore.generateTwoRandomCats();
 });
 
@@ -112,6 +111,9 @@ const incrementVote = (catId: string) => {
   margin: 30px;
   font-family: 'Poppins';
   font-weight: 500;
+  width: 140px;
+  display: flex;
+  justify-content: center;
 }
 
 .button:hover {
