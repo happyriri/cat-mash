@@ -29,9 +29,21 @@ const leaveCatChoice = () => {
   imgTears.value = true;
 }
 
-const incrementVote = (catId: string) => {
+const incrementVote = async (catId: string, catIndex: number) => {
+  document.getElementById(`cat-${catIndex}-incremented`)?.classList.add('fade-up');
   catsStore.incrementVote(catId);
   catsStore.generateTwoRandomCats();
+  setTimeout(() => {
+    document.getElementById(`cat-${catIndex}-incremented`)?.classList.remove('fade-up');
+  }, 700);
+}
+
+const goToStatsPage = () => {
+  if (catsStore.numberVotes < 1) {
+    return;
+  }
+
+  router.push('/stats');
 }
 
 </script>
@@ -45,18 +57,28 @@ const incrementVote = (catId: string) => {
         <span>Cutest cat ?</span>
       </div>
 
-      <span @click="router.push('/stats')" class="button">Voir les {{ catsStore.numberVotes }} votes</span>
+      <span @click="goToStatsPage" class="button" :class="{ 'disabled': catsStore.numberVotes < 1 }">
+        <template v-if="catsStore.numberVotes < 1">
+          Aucun vote
+        </template>
+
+        <template v-else>
+          Voir les {{ catsStore.numberVotes }} votes
+        </template>
+      </span>
     </div>
 
     <div class="cats">
-      <div @mouseenter="enterCatChoice" @mouseleave="leaveCatChoice">
-        <TheCat @vote="incrementVote(catsStore.twoCatsToVote[0].id)" :cat="catsStore.twoCatsToVote[0]"/>
+      <div @mouseenter="enterCatChoice" @mouseleave="leaveCatChoice" class="cat-container">
+        <TheCat @vote="incrementVote(catsStore.twoCatsToVote[0].id, 0)" :cat="catsStore.twoCatsToVote[0]"/>
+        <div id="cat-0-incremented" class="increment">+1</div>
       </div>
 
       <div class="versus">VS</div>
       
-      <div @mouseenter="enterCatChoice" @mouseleave="leaveCatChoice">
-        <TheCat @vote="incrementVote(catsStore.twoCatsToVote[1].id)" :cat="catsStore.twoCatsToVote[1]"/>
+      <div @mouseenter="enterCatChoice" @mouseleave="leaveCatChoice" class="cat-container">
+        <TheCat @vote="incrementVote(catsStore.twoCatsToVote[1].id, 1)" :cat="catsStore.twoCatsToVote[1]"/>
+        <div id="cat-1-incremented" class="increment">+1</div>
       </div>
     </div>
     
@@ -120,6 +142,11 @@ const incrementVote = (catId: string) => {
   opacity: 0.7;
 }
 
+.button.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 .cats {
   display: inline-flex;
   width: 100vw;
@@ -128,10 +155,40 @@ const incrementVote = (catId: string) => {
   align-items: center;
 }
 
+.cat-container {
+  position: relative;
+}
+
+.increment {
+  font-family: 'VanillaDreams';
+  position: absolute;
+  right: -16px;
+  top: 0;
+  bottom: 0;
+  color: #FFC970;
+  font-size: 40px;
+  opacity: 0;
+}
+
+.increment.fade-up {
+  animation: 700ms ease-in fade-up;
+}
+
 .versus {
   font-family: 'VanillaDreams';
   font-size: 102px;
   color: #000000;
   margin: 0 4rem;
+}
+
+@keyframes fade-up {
+  from {
+    transform: translate(0);
+    opacity: 1;
+  }
+  to {
+    transform: translate(0, -40px); 
+    opacity: 0;
+ }
 }
 </style>
