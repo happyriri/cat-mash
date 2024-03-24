@@ -23,6 +23,16 @@ export const useCatsStore = defineStore('cats', () => {
           },0);
     });
 
+    const votesOrderedDesc = computed(() => {
+        return cats.value.sort((catA, catB) => {
+            return catB.vote - catA.vote;
+        });
+    });
+
+    const votesOrderedAsc = computed(() => {
+        return votesOrderedDesc.value.reverse();
+    })
+
     function getAllCats() {
         cats.value = catsManager.getAllCats();
     }
@@ -48,5 +58,5 @@ export const useCatsStore = defineStore('cats', () => {
         }
     }
 
-    return { cats, twoCatsToVote, numberVotes, getAllCats, generateTwoRandomCats, incrementVote };
+    return { cats, twoCatsToVote, numberVotes, votesOrderedDesc, votesOrderedAsc, getAllCats, generateTwoRandomCats, incrementVote };
 });

@@ -3,6 +3,29 @@ html, body {
   padding: 0;
 }
 
+.button {
+  background: #3787FF;
+  font-size: 16px;
+  padding: 7px 11px;
+  border-radius: 20px;
+  color: #FEFEFE;
+  cursor: pointer;
+  height: fit-content;
+  font-family: 'Poppins';
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+}
+
+.button:hover {
+  opacity: 0.7;
+}
+
+.button.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 @font-face {
   font-family: "VanillaDreams";
   src: url(./assets/fonts/VanillaDreamers.otf);

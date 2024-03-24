@@ -122,37 +122,16 @@ const goToStatsPage = () => {
   height: 120px;
 }
 
-.button {
-  background: #3787FF;
-  font-size: 16px;
-  padding: 7px 11px;
-  border-radius: 20px;
-  color: #FEFEFE;
-  cursor: pointer;
-  height: fit-content;
-  margin: 30px;
-  font-family: 'Poppins';
-  font-weight: 500;
-  width: 140px;
-  display: flex;
-  justify-content: center;
-}
-
-.button:hover {
-  opacity: 0.7;
-}
-
-.button.disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
-
 .cats {
   display: inline-flex;
   width: 100vw;
   height: calc(100vh - 210px);
   justify-content: center;
   align-items: center;
+}
+
+.button {
+  margin: 30px;
 }
 
 .cat-container {
