@@ -1,6 +1,5 @@
 # Demo
 [Demo Here](https://happyriri.github.io/cat-mash/#/)
-
 <br>
 
 # Figma
