@@ -1,9 +1,15 @@
-# Vue 3 + TypeScript + Vite
+# Demo
+[Demo Here](https://happyriri.github.io/cat-mash/#/)
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+<br>
 
-## Recommended Setup
+# Figma
+[Figma File Here](https://www.figma.com/file/eMd4zQMUMIggQOaqaNXHbZ/L'Atelier---Exercice-technique---Le-chat-le-plus-mignon?type=design&node-id=12%3A3&mode=design&t=8IBPyL6SQ74Z2vor-1)
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+<br>
 
-- Use [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc) for performing the same type checking from the command line, or for generating d.ts files for SFCs.
+# Run app locally
+```bash
+$ npm install
+$ npm run dev
+```
